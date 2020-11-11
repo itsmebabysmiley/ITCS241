@@ -1,3 +1,7 @@
+# Nopparat Pengsuk
+# 6288103
+# Section 2
+
 use `tinycollege`;
 -- 1
 SELECT CONCAT(EMP_FNAME,' ',EMP_LNAME), 2020 - YEAR(EMP_DOB) AS "AGE" FROM professor 
