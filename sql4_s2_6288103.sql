@@ -26,7 +26,7 @@ WHERE p.EMP_FNAME LIKE "C%";
 #Q4
 SELECT class.COURSE_CODE, class.CLASS_SECTION FROM class
 WHERE class.COURSE_CODE NOT IN (SELECT COURSE_CODE FROM class 
-								WHERE class_section = 2)
+				WHERE class_section = 2)
 ORDER BY class.COURSE_CODE ASC;
 
 #Q5
@@ -36,7 +36,7 @@ WHERE student.STU_FNAME IN (SELECT EMP_FNAME FROM tinycollege3.professor);
 #Q6
 SELECT student.STU_FNAME, student.STU_LNAME, student.STU_GPA FROM student
 WHERE student.STU_GPA > (SELECT avg(STU_GPA) FROM tinycollege3.student
-						where dept_code = "MATH");
+			 where dept_code = "MATH");
                         
 #Q7
 CREATE VIEW vw_topstudents 
