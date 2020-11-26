@@ -41,7 +41,7 @@ WHERE student.STU_GPA > (SELECT avg(STU_GPA) FROM tinycollege3.student
 #Q7
 CREATE VIEW vw_topstudents 
 AS
-SELECT s.STU_NUM, s.STU_NUM, s.STU_FNAME, s.STU_LNAME, s.STU_GPA ,s.DEPT_CODE FROM student AS s
+SELECT s.STU_NUM, s.STU_FNAME, s.STU_LNAME, s.STU_GPA ,s.DEPT_CODE FROM student AS s
 WHERE s.STU_GPA =  any  (select Max(stu_gpa) as STU_GPA from student 
 						 group by DEPT_CODE);
 
