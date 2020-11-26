@@ -44,7 +44,8 @@ AS
 SELECT s.STU_NUM, s.STU_FNAME, s.STU_LNAME, s.STU_GPA ,s.DEPT_CODE FROM student AS s
 WHERE s.STU_GPA =  any  (select Max(stu_gpa) as STU_GPA from student 
 						 group by DEPT_CODE); 
-						 -- where student.DEPT_CODE = s.DEPT_CODE);
+# recommed this one
+-- WHERE s.STU_GPA = (select Max(stu_gpa) as STU_GPA from student AS s2 where s2.DEPT_CODE = s.DEPT_CODE ); 
 
 SELECT * FROM vw_topstudents;
 						 
