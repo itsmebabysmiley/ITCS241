@@ -1,7 +1,9 @@
 # Project02
 # Queries 30 
 
-#q1 show all customer infomation.
+-- Basic
+-------------------------------------------------------------------------------------------------
+#q1 show all customer information.
 SELECT * FROM customer;
 
 #q2 show productID, product name, and product price that have price more than 500 Baht.
@@ -12,7 +14,7 @@ WHERE prod_price > 500;
 SELECT prod_id, prod_name FROM product
 WHERE prod_name LIKE 'b%';
 
-#q4 show shop infomation that begin with m and sort by alphabet.
+#q4 show shop information that begin with m and sort by alphabet.
 SELECT * FROM shop
 WHERE shop_name LIKE 'm%'
 ORDER BY shop_name;
@@ -25,7 +27,7 @@ WHERE customer_lname LIKE 'p%';
 SELECT pay_id, rec_createdDate, rec_deliveryDate FROM receipt
 WHERE rec_id > 5000;
 
-#q7 show product infomation where type is dessert
+#q7 show product information where type is dessert
 SELECT * FROM product
 WHERE prod_type LIKE "dessert";
 
@@ -48,7 +50,7 @@ SELECT COUNT(*) as count FROM product;
 #q12 show the average price of product type is dessert.
 SELECT AVG(prod_price) as average FROM product;
 
-#q13 show product infomation where product description is not null.
+#q13 show product information where product description is not null.
 SELECT * FROM product
 WHERE  prod_des IS NOT NULL;
 
@@ -59,9 +61,10 @@ SELECT MAX(prod_price) as max FROM product;
 SELECT * FROM receipt
 WHERE date(rec_createdDate) < "2020-11-10";
 
+#Advanced
 -------------------------------------------------------------------------------------------------
 
-#q16 show infomation of product which is have highest price
+#q16 show information of product which is have highest price
 SELECT * FROM product
 WHERE prod_price = (SELECT MAX(prod_price) FROM product);
 
@@ -113,9 +116,7 @@ SELECT p.prod_id, s.shop_name AS "shop name", p.prod_price AS "price" FROM produ
 JOIN shop AS s ON s.shop_id = p.shop_id;
 
 SELECT * FROM vw_productandshop;
-/**
-please continue here till 30 -- k kaa
-**/
+
 
 #26 show shops that have the product type is dessert and order alphabet
 SELECT s.shop_name AS "Shop Name", p.prod_name AS "Product Name", p.prod_type AS "Product Type"
@@ -129,9 +130,10 @@ ORDER BY s.shop_name ASC;
 SELECT COUNT(*) FROM _order
 WHERE DAY(order_createDate) = 11 AND MONTH(order_createDate) = 11;
 
-#28 avg money that pay by VISA
-SELECT ROUND(AVG(pay_amount)) AS AVG
-FROM credit_card WHERE cc_type = 'VISA';
+#28 find the maximum product on the database.
+SELECT prod_name , MAX(prod_price) as max FROM product
+where prod_price = (select max(prod_price) from product)
+
 
 #29 find shop and price that has the max value of a product is electronic type
 SELECT s.shop_name AS "Shop name", MAX(prod_price) AS "MAX"
@@ -140,10 +142,11 @@ JOIN shop s ON s.shop_id = product.shop_id
 WHERE prod_type LIKE 'electronic';
 
 #30 find the min value of product that pay by MSTC
-SELECT MIN(prod_price) AS "MIN VALUE PRODUCT"
+SELECT prod_name, MIN(prod_price) AS "MIN VALUE PRODUCT"
 FROM product p
 JOIN _orderLine ordL ON ordL.Pro_id = p.prod_ID
 JOIN payment pa ON pa.Or_id = ordL.Or_id
 JOIN Credit_card c ON c.pay_id = pa.pay_id
 WHERE c.cc_type LIKE 'MSTC';
+
 
